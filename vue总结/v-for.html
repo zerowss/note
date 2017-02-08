@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body >
+    <div id="example">
+        <ul id="demo">
+            <li v-for="(item, index) in items" >
+                {{item.msg}} - {{index}}
+            </li>
+        </ul>
+    </div>
+    <span v-pre>{{ this will not be compiled }}</span>
+</body>
+<script>
+     new Vue({
+        el:'#demo',
+        data : {
+            items : [
+                {msg:'顺风车'},
+                {msg:'专车'}
+            ]
+        }
+    })
+</script>
+</html>

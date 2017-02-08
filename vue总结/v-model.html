@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body >
+    <div id="example">
+        <form action="#" >
+            姓名：<input type="text" v-model="datas.name" placeholder=""><br>
+            性别：
+            <input type="radio" id="man" value="one" v-model="datas.sex">
+            <label for="man">男</label>
+            <input type="radio" id="male" value="two" v-model="datas.sex">
+            <label for="male">女</label><br>
+            兴趣：
+            <input type="checkbox" id="book" value="book" v-model="datas.interest">
+            <label for="book">阅读</label>
+            <input type="checkbox" id="swim" value="swim" v-model="datas.interest">
+            <label for="swim">游泳</label>
+            <input type="checkbox" id="game" value="game" v-model="datas.interest">
+            <label for="game">游戏</label>
+            <input type="checkbox" id="song" value="song" v-model="datas.interest">
+            <label for="song">唱歌</label><br>
+            身份：
+            <select  v-model="datas.identity">
+                <option value="teacher" >教师</option>
+                <option value="doctor" >医生</option>
+                <option value="lawyer" >律师</option>
+            </select>
+        </form>
+        <p>姓名：{{ datas.name }}</p>
+        <p>性别：{{ datas.sex }}</p>
+        <p>兴趣：{{ datas.interest }}</p>
+        <p>身份：{{ datas.identity }}</p>
+    </div>
+
+
+</body>
+<script>
+     new Vue({
+        el:'#example',
+        data : {
+            datas : {
+                name :'',
+                sex:'',
+                interest :[],
+                identity :''
+            }
+        }
+    })
+</script>
+</html>
