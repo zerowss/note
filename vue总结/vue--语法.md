@@ -271,3 +271,98 @@ Vue 不能检测以下变动的数组：
 11. v-cloak : 这个指令保持在元素上直到关联实例结束编译。和 CSS 规则如 [v-cloak] { display: none } 一起用时，这个指令可以隐藏未编译的 Mustache 标签直到实例准备完毕。
 12. v-once : 只渲染元素和组件一次。随后的重新渲染,元素/组件及其所有的子节点将被视为静态内容并跳过。这可以用于优化更新性能。
     
+
+---
+注意有坑：
+1.v-on可以绑定多种类型的方法，但是用v-on绑定多个click事件（即同一类型事件绑定多个方法），就只会绑定第一个事件。
+2.vue实例只可以绑定一个元素（el为实例提供挂载元素）
+3.记录一个简单的例子，如何让v-for循环出来的列表的click事件只对当前对应的元素有效
+```
+<body >
+    <div >
+        <ul id="app">
+            <li v-for='item of items' @click='toggle(item)'>
+                <span v-show='item.show'>{{item.content}}</span>
+            </li>
+        </ul>
+    </div>
+</body>
+
+<script>
+    new Vue({
+        el:'#app',
+        data : function () {
+            return {
+                items:[
+                    {
+                        content : '1 item',
+                        show : true
+                    },
+                    {
+                        content : '2 item',
+                        show : true
+                    },
+                    {
+                        content : '3 item',
+                        show : true
+                    }
+                ]
+            }
+        },
+        methods : {
+            toggle : function (item) {
+                item.show = !item.show;
+            }
+        }
+    })
+</script>
+```
+**从数据角度出发，定义号数据结构，操作数据**
+
+
+---
+#### 过滤器（本质上都是函数）用 | 进行连接，支持链式调用
+- 作用----用于用户输入数据后进行处理，返回一个数据结果
+- 可以在任何出现表达式的地方添加过滤器
+- 可以接受参数，参数写在过滤器名称后面，以空格分割. 其中过滤器函数始终以表达式的值作为第一个参数，带引号的参数当作字符串处理，布带引号的参数当作是数据属性名称来处理
+```
+{{ message | filter 'arg1' arg2  }}
+```
+- 内置过滤器（1.0版本）
+    - capitalize 首字母转换为大写形式
+    - uppercase 所有字母转换为大写形式
+    - lowercase 所有字母转换为小写形式
+    - json (JSON.stringify()的简版)将表达式的值转换为JSON字符串，可以接受一个类型为Number的参数，指定缩近距离
+    - limitBy 限制==数组==为开始的前N个元素
+    - filterBy 按条件在数组中搜索
+    - orderBy 返回排序后的数组
+    - currency 讲数字值转换为货币形式输出
+
+---
+## 自定义过滤器
+- 全剧函数 Vue.filter(ID,function(){})
+- Vue 2.x 中，过滤器只能在 mustache 绑定和 v-bind 表达式（从 2.1.0 开始支持）中使用，因为过滤器设计目的就是用于文本转换。为了在其他指令中实现更复杂的数据变换，你应该使用计算属性。
+- 可以写在全局也可以写在实例中，采用全局时，需要写在实例化之前。执行顺序有关
+
+---
+## 计算属性
+1. vue实例中的computed
+```
+<div id="example">
+  <p>Original message: "{{ message }}"</p>
+  <p>Computed reversed message: "{{ reversedMessage }}"</p>
+</div>
+var vm = new Vue({
+  el: '#example',
+  data: {
+    message: 'Hello'
+  },
+  computed: {
+    // a computed getter
+    reversedMessage: function () {
+      // `this` points to the vm instance
+      return this.message.split('').reverse().join('')
+    }
+  }
+})
+```
