@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body >
+    <div >
+        <ul id="app">
+            <li v-for='item of items' @click='toggle(item)'>
+                <span v-show='item.show'>{{item.content}}</span>
+            </li>
+        </ul>
+    </div>
+</body>
+
+<script>
+    new Vue({
+        el:'#app',
+        data : function () {
+            return {
+                items:[
+                    {
+                        content : '1 item',
+                        show : true
+                    },
+                    {
+                        content : '2 item',
+                        show : true
+                    },
+                    {
+                        content : '3 item',
+                        show : true
+                    }
+                ]
+            }
+        },
+        methods : {
+            toggle : function (item) {
+                item.show = !item.show;
+            }
+        }
+    })
+</script>
+</html>
