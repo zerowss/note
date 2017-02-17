@@ -10,17 +10,21 @@
     .detail{
         padding: 0.24rem;
         font-size: 12px;
+
     }
     img{
         display: block;
-        width: 80%;
-        margin:0 auto 0.2rem;
+        width: 100%;
+        max-width: 640px;
+        margin:1.48rem auto 0;
     }
     p{
         font-size: 14px;
         line-height: 0.5rem;
         text-align: justify;
         padding-bottom: 0.24rem;
+        max-width: 640px;
+        margin:0.28rem auto 0;
     }
 </style>
 <script type="text/javascript">

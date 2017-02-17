@@ -4,15 +4,15 @@
             <div
                 id="header_btn_nav"
                 class="header_btn header_btn_back "
-                @:click = "goBack"
+                v-on:click = "goBack"
             >
                 返回
             </div>
-        </div>
         <div class="header_cont flex">
             详情
         </div>
         <div class="header_btn header_btn_cart"></div>
+    </div>
     </header>
 </template>
 <style media="screen">
@@ -69,7 +69,7 @@
     export default{
         methods : {
             goBack(){
-                window.hostory.back();
+                window.history.back();
             }
         }
     }
